@@ -1,0 +1,7 @@
+.background-section {
+    background-image: url("../img/Bg-Unidash.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 3rem 0; /* Ajuste o espaçamento superior e inferior conforme necessário */
+}

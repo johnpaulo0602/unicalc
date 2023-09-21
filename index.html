@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UniDash</title>
+
+    <!-- Css Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Icones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Css Personalizado -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <main>
+        <!-- Hero section -->
+        <section class="container-fluid background-section">
+            <div class="container">
+                <div class="row flex-lg-row-reverse align-items-center justify-content-md-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <img src="assets/img/Estudante-Unidash.png" class="d-block mx-lg-auto img-fluid"
+                            alt="Estudante sorrindo" width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold lh-1 mb-3 text-white">Planeje o seu Futuro Acadêmico</h1>
+                        <p class="lead text-white">Antecipe os gastos com sua graduação na Unidesc. Use nossa ferramenta
+                            para calcular o custo total do curso, juros e bolsa.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <a href="#calcular" type="button" class="btn btn-primary">Calcular Agora! <i class="bi bi-chevron-down"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculo -->
+        <section id="calcular">
+            <div class="container">
+                <div class="text-center m-5">
+                    <h1>Faça agora o calculo da sua mensalidade!</h1>
+                    <p class="">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem nisi quae sequi facere
+                        autem, aut esse reiciendis asperiores, quisquam neque nam est ex cumque laborum saepe.
+                        Distinctio ipsum quos natus?</p>
+                </div>
+                <div class="row py-5">
+                    <div class="col-6">
+                        <form class="row align-items-center g-3">
+                            <div class="col-md-8">
+                                <label for="inputCurso" class="form-label">Curso</label>
+                                <select id="inputCurso" class="form-select">
+                                    <option selected>Selecione seu curso...</option>
+                                    <option value="administração">Administração</option>
+                                    <option value="arquitetura-e-urbanismo">Arquitetura e Urbanismo</option>
+                                    <option value="ciências-contábeis">Ciências Contábeis</option>
+                                    <option value="direito">Direito</option>
+                                    <option value="enfermagem">Enfermagem</option>
+                                    <option value="engenharia-civil">Engenharia Civil</option>
+                                    <option value="farmácia">Farmácia</option>
+                                    <option value="medicina">Medicina</option>
+                                    <option value="odontologia">Odontologia</option>
+                                    <option value="pedagogia">Pedagogia</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="inputSemestre" class="form-label">Semestre</label>
+                                <select id="inputSemestre" class="form-select">
+                                    <option selected>Selecione...</option>
+                                    <option value="1">1º</option>
+                                    <option value="2">2º</option>
+                                    <option value="3">3º</option>
+                                    <option value="4">4º</option>
+                                    <option value="5">5º</option>
+                                    <option value="6">6º</option>
+                                    <option value="7">7º</option>
+                                    <option value="8">8º</option>
+                                    <option value="9">9º</option>
+                                    <option value="10">10º</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="inputValorMensalidade" class="form-label">Valor da mensalidade</label>
+                                <input type="number" class="form-control" placeholder="R$" id="inputValorMensalidade">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="inputTxReajuste" class="form-label">Taxa de Reajuste</label>
+                                <input type="number" class="form-control" placeholder="%" id="inputTxReajuste">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="inputBolsa" class="form-label">Possui bolsa?</label>
+                                <select id="inputBolsa" class="form-select">
+                                    <option selected>Selecione...</option>
+                                    <option value="sim">Sim</option>
+                                    <option value="nao">Não</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="inputBolsa" class="form-label">Qual modalidade?</label>
+                                <select id="inputBolsa" class="form-select">
+                                    <option selected>Selecione...</option>
+                                    <option value="prouni">ProUni</option>
+                                    <option value="fies">FIES</option>
+                                    <option value="ovg">OVG</option>
+                                    <option value="vestibular">Vestibular Unidesc</option>
+                                    <option value="outras">Outras</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="inputTxJuros" class="form-label">Quantos %</label>
+                                <input type="number" class="form-control" placeholder="%" id="inputTxJuros">
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <label class="form-check-label" for="gridCheck">
+                                        Aceito os <a href="#">termos e condições</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 ">
+                                <button type="button" class="btn btn-primary d-block">Calcular</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <h2>Valor pago até o momento</h2>
+                        <h2>R$3.000,00</h2>
+                        <h2>Valor da mensalidade com a bolsa</h2>
+                        <h2>R$300,00</h2>
+                        <h2>Valor total do curso</h2>
+                        <h2>R$20.000,00</h2>
+                        <button class="btn btn-secondary">Ver completo</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Rodapé da página -->
+    </footer>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>
