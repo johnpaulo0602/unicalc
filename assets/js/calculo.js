@@ -57,8 +57,57 @@ function calcularAnoIngresso(semestreSelecionado) {
     return anoIngresso;
 }
 
-// Evento de mudança no campo "Semestre"
-document.getElementById("inputSemestre").addEventListener("change", function () {
-    const semestreSelecionado = parseInt(this.value);
-    calcularAnoIngresso(semestreSelecionado);
+// Obtendo o valor da mensalidade
+const inputValor = document.getElementById("inputValorMensalidade");
+
+// Obtendo a porcentagem do reajuste
+const inputReajuste = document.getElementById("inputTxReajuste");
+
+// Evento de clique no botão "Calcular"
+document.getElementById("btnCalcular").addEventListener("click", function () {
+    const semestreSelecionado = parseInt(inputSemestre.value);
+    const valorInicialMensalidade = parseFloat(inputValor.value);
+    const taxaReajuste = parseFloat(inputReajuste.value) / 100; // Convertemos a porcentagem para decimal
+    calcularValorSemestre(valorInicialMensalidade, taxaReajuste, semestreSelecionado);
 });
+
+// Função para calcular o valor de cada semestre com a taxa de reajuste
+function calcularValorSemestre(valorInicialMensalidade, taxaReajuste, semestreSelecionado) {
+    const cursoSelecionado = document.getElementById("inputCurso").value;
+    const quantidadeSemestres = cursosESemestres[cursoSelecionado];
+
+    // Verifique se a quantidade de semestres está definida para o curso selecionado
+    if (quantidadeSemestres === undefined) {
+        console.error("Quantidade de semestres indefinida para o curso selecionado.");
+        return;
+    }
+
+    // Calcule o valor de cada semestre com o reajuste
+    const valorSemestral = [];
+
+    for (let semestre = 1; semestre <= quantidadeSemestres; semestre++) {
+        valorInicialMensalidade *= (1 + taxaReajuste);
+        valorSemestral.push(valorInicialMensalidade);
+    }
+
+    // Exiba o resultado na página
+    exibirResultado(valorSemestral);
+
+    // Exiba o resultado em um alert
+    const resultadoAlert = valorSemestral.map((valor, index) => `${index + 1}º Semestre: R$ ${valor.toFixed(2)}`).join('\n');
+    alert("Valores Semestrais:\n" + resultadoAlert);
+}
+
+// Função para exibir o resultado na página
+function exibirResultado(valoresSemestrais) {
+    const resultadoDiv = document.getElementById("resultadoId");
+
+    // Crie uma string para exibir o resultado
+    const resultadoHTML = `
+        <h2>Valores Semestrais:</h2>
+        <ul>${valoresSemestrais.map((valor, index) => `<li>${index + 1}º Semestre: R$ ${valor.toFixed(2)}</li>`).join('')}</ul>
+    `;
+
+    // Atualize o conteúdo da div com o resultado
+    resultadoDiv.innerHTML = resultadoHTML;
+}
