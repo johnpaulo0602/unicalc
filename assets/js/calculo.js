@@ -62,3 +62,75 @@ document.getElementById("inputSemestre").addEventListener("change", function () 
     const semestreSelecionado = parseInt(this.value);
     calcularAnoIngresso(semestreSelecionado);
 });
+
+// Função para calcular o valor por semestre
+function calcularValorPorSemestre(mensalidade, taxaReajuste, semestreSelecionado) {
+    let valorPorSemestre = mensalidade;
+
+    for (let i = 1; i < semestreSelecionado; i++) {
+        valorPorSemestre += valorPorSemestre * (taxaReajuste / 100);
+    }
+
+    return valorPorSemestre;
+}
+
+// Função para calcular o valor total do curso
+function calcularValorTotalCurso(mensalidade, taxaReajuste, semestreSelecionado, quantidadeSemestres) {
+    let valorTotal = 0;
+
+    for (let i = semestreSelecionado; i <= quantidadeSemestres; i++) {
+        valorTotal += mensalidade;
+        mensalidade += mensalidade * (taxaReajuste / 100);
+    }
+
+    return valorTotal;
+}
+
+// Função para calcular os valores
+function calcularValores() {
+    // Obtenha os valores inseridos pelo usuário
+    const valorMensalidade = parseFloat(document.getElementById("inputValorMensalidade").value);
+    const taxaReajuste = parseFloat(document.getElementById("inputTxReajuste").value);
+    const semestreSelecionado = parseInt(document.getElementById("inputSemestre").value);
+    const cursoSelecionado = document.getElementById("inputCurso").value;
+    const possuiBolsa = document.getElementById("inputBolsa").value;
+    const desconto = parseFloat(document.getElementById("inputTxJuros").value);
+    const aceitouTermos = document.getElementById("gridCheck").checked;
+
+    // Verifique se o usuário aceitou os termos e condições
+    if (!aceitouTermos) {
+        alert("Por favor, aceite os termos e condições para calcular.");
+        return;
+    }
+
+    // Obtenha a quantidade de semestres para o curso selecionado
+    const quantidadeSemestres = cursosESemestres[cursoSelecionado];
+
+    // Calcule o valor total do curso e o valor por semestre
+    const valorPorSemestre = calcularValorPorSemestre(valorMensalidade, taxaReajuste, semestreSelecionado);
+    const valorTotal = calcularValorTotalCurso(valorMensalidade, taxaReajuste, semestreSelecionado, quantidadeSemestres);
+
+    for (let i = semestreSelecionado; i <= quantidadeSemestres; i++) {
+        valorTotal += valorMensalidade;
+        valorPorSemestre += valorMensalidade;
+
+        // Aplicar a taxa de reajuste se necessário
+        if (i < quantidadeSemestres) {
+            valorMensalidade += valorMensalidade * (taxaReajuste / 100);
+        }
+    }
+
+    // Aplicar desconto se o usuário tiver uma bolsa
+    if (possuiBolsa === "sim") {
+        valorPorSemestre -= (valorPorSemestre * desconto) / 100;
+    }
+
+    // Exiba os resultados na página
+    document.getElementById("valorPorSemestre").textContent = `Valor por Semestre: R$ ${valorPorSemestre.toFixed(2)}`;
+    document.getElementById("valorTotalCurso").textContent = `Valor Total do Curso: R$ ${valorTotal.toFixed(2)}`;
+}
+
+// Evento de clique no botão "Calcular"
+document.getElementById("calcularButton").addEventListener("click", function () {
+    calcularValores();
+});
