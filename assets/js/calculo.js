@@ -1,41 +1,24 @@
-// Definição do objeto com a quantidade de semestres por curso
-const cursosESemestres = {
-    administração: 8,
-    "arquitetura-e-urbanismo": 10,
-    "ciências-contábeis": 8,
-    direito: 10,
-    enfermagem: 8,
-    "engenharia-civil": 10,
-    farmácia: 8,
-    medicina: 12,
-    odontologia: 10,
-    pedagogia: 8
-};
-
-// Selecionar elementos do DOM
-const inputSemestre = document.getElementById("inputSemestre");
-const inputValor = document.getElementById("inputValorMensalidade");
-const inputReajuste = document.getElementById("inputTxReajuste");
-const inputDesconto = document.getElementById("inputTxJuros");
+const { inputSemestres } = require("./domElements");
+const { cursosESemestres } = require("./CursosESemestre")
 
 // Função para habilitar ou desabilitar o campo de seleção de semestre
 function habilitarDesabilitarCampoSemestre(cursoSelecionado) {
     const quantidadeSemestres = cursosESemestres[cursoSelecionado];
-    inputSemestre.disabled = quantidadeSemestres === undefined;
+    inputSemestres.disabled = quantidadeSemestres === undefined;
 
-    if (!inputSemestre.disabled) {
+    if (!inputSemestres.disabled) {
         atualizarOpcoesSemestre(quantidadeSemestres);
     }
 }
 
 // Função para atualizar as opções do campo de seleção de semestre
 function atualizarOpcoesSemestre(quantidadeSemestres) {
-    inputSemestre.innerHTML = "";
+    inputSemestres.innerHTML = "";
     for (let i = 1; i <= quantidadeSemestres; i++) {
         const option = document.createElement("option");
         option.value = i.toString();
         option.textContent = `${i}º Semestre`;
-        inputSemestre.appendChild(option);
+        inputSemestres.appendChild(option);
     }
 }
 
@@ -85,7 +68,7 @@ function exibirResultado(valoresSemestrais, semestreSelecionado) {
 
 // Função para obter os valores dos campos de entrada
 function obterValoresInput() {
-    const semestreSelecionado = parseInt(inputSemestre.value); // Obtém o valor do campo Semestre
+    const semestreSelecionado = parseInt(inputSemestres.value); // Obtém o valor do campo Semestre
     const valorInicialMensalidade = parseFloat(inputValor.value); // Obtém o valor do campo Mensalidade
     const taxaReajuste = parseFloat(inputReajuste.value) / 100; // Obtém o valor do campo Reajuste
     const desconto = parseFloat(inputDesconto.value); // Obtém o valor do campo Juros
@@ -93,14 +76,74 @@ function obterValoresInput() {
     return { semestreSelecionado, valorInicialMensalidade, taxaReajuste, desconto };
 }
 
-// Evento de mudança no campo "Curso" para habilitar/desabilitar o campo de semestre
-document.getElementById("inputCurso").addEventListener("change", function () {
-    const cursoSelecionado = this.value;
-    habilitarDesabilitarCampoSemestre(cursoSelecionado);
-});
+// Função para calcular o valor por semestre
+function calcularValorPorSemestre(mensalidade, taxaReajuste, semestreSelecionado) {
+    let valorPorSemestre = mensalidade;
 
-// Evento de clique no botão "Calcular" para calcular os valores dos semestres
-document.getElementById("btnCalcular").addEventListener("click", function () {
-    const { semestreSelecionado, valorInicialMensalidade, taxaReajuste, desconto } = obterValoresInput();
-    calcularValorSemestre(valorInicialMensalidade, taxaReajuste, semestreSelecionado, desconto);
+    for (let i = 1; i < semestreSelecionado; i++) {
+        valorPorSemestre += valorPorSemestre * (taxaReajuste / 100);
+    }
+
+    return valorPorSemestre;
+}
+
+// Função para calcular o valor total do curso
+function calcularValorTotalCurso(mensalidade, taxaReajuste, semestreSelecionado, quantidadeSemestres) {
+    let valorTotal = 0;
+
+    for (let i = semestreSelecionado; i <= quantidadeSemestres; i++) {
+        valorTotal += mensalidade;
+        mensalidade += mensalidade * (taxaReajuste / 100);
+    }
+
+    return valorTotal;
+}
+
+// Função para calcular os valores
+function calcularValores() {
+    // Obtenha os valores inseridos pelo usuário
+    const valorMensalidade = parseFloat(document.getElementById("inputValorMensalidade").value);
+    const taxaReajuste = parseFloat(document.getElementById("inputTxReajuste").value);
+    const semestreSelecionado = parseInt(document.getElementById("inputSemestre").value);
+    const cursoSelecionado = document.getElementById("inputCurso").value;
+    const possuiBolsa = document.getElementById("inputBolsa").value;
+    const desconto = parseFloat(document.getElementById("inputTxJuros").value);
+    const aceitouTermos = document.getElementById("gridCheck").checked;
+
+    // Verifique se o usuário aceitou os termos e condições
+    if (!aceitouTermos) {
+        alert("Por favor, aceite os termos e condições para calcular.");
+        return;
+    }
+
+    // Obtenha a quantidade de semestres para o curso selecionado
+    const quantidadeSemestres = cursosESemestres[cursoSelecionado];
+
+    // Calcule o valor total do curso e o valor por semestre
+    const valorPorSemestre = calcularValorPorSemestre(valorMensalidade, taxaReajuste, semestreSelecionado);
+    const valorTotal = calcularValorTotalCurso(valorMensalidade, taxaReajuste, semestreSelecionado, quantidadeSemestres);
+
+    for (let i = semestreSelecionado; i <= quantidadeSemestres; i++) {
+        valorTotal += valorMensalidade;
+        valorPorSemestre += valorMensalidade;
+
+        // Aplicar a taxa de reajuste se necessário
+        if (i < quantidadeSemestres) {
+            valorMensalidade += valorMensalidade * (taxaReajuste / 100);
+        }
+    }
+
+    // Aplicar desconto se o usuário tiver uma bolsa
+    if (possuiBolsa === "sim") {
+        valorPorSemestre -= (valorPorSemestre * desconto) / 100;
+    }
+
+    // Exiba os resultados na página
+    document.getElementById("valorPorSemestre").textContent = `Valor por Semestre: R$ ${valorPorSemestre.toFixed(2)}`;
+    document.getElementById("valorTotalCurso").textContent = `Valor Total do Curso: R$ ${valorTotal.toFixed(2)}`;
+}
+
+// Evento de clique no botão "Calcular"
+document.getElementById("calcularButton").addEventListener("click", function () {
+    calcularValores();
 });
