@@ -41,6 +41,7 @@ document.getElementById("inputCurso").addEventListener("change", function () {
     }
 });
 
+
 // Função para calcular o ano de ingresso com base no semestre selecionado
 function calcularAnoIngresso(semestreSelecionado) {
     const dataAtual = new Date();
@@ -99,7 +100,11 @@ function calcularValores() {
 
     // Verifique se o usuário aceitou os termos e condições
     if (!aceitouTermos) {
-        alert("Por favor, aceite os termos e condições para calcular.");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops!',
+            text: 'Por favor, aceite os termos e condições para calcular.'
+        });
         return;
     }
 
