@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -12,16 +12,16 @@
     <!-- Css SweetAlert2 -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 
-    <!-- Icones -->
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- Css Personalizado -->
+    <!-- CSS Personalizado -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <main>
-        <!-- Hero section -->
+        <!-- Seção Hero -->
         <section class="container-fluid background-section">
             <div class="container">
                 <div class="row flex-lg-row-reverse align-items-center justify-content-center g-4 py-md-5 py-sm-2">
@@ -40,7 +40,7 @@
             </div>
         </section>
 
-        <!-- Calculo -->
+        <!-- Cálculo -->
         <section id="calcular">
             <div class="container col-lg-8 col-sm-12 my-5">
                 <div class="text-center mb-4">
@@ -97,9 +97,9 @@
                                     <option value="nao">Não</option>
                                 </select>
                             </div>
-                            <div class="col-md-4 col-md-12">
-                                <label for="inputBolsa" class="form-label">Qual modalidade?</label>
-                                <select id="inputBolsa" class="form-select">
+                            <div class="col-md-4">
+                                <label for="inputModalidadeBolsa" class="form-label">Qual modalidade?</label>
+                                <select id="inputModalidadeBolsa" class="form-select">
                                     <option selected>Selecione...</option>
                                     <option value="prouni">ProUni</option>
                                     <option value="fies">FIES</option>
@@ -119,13 +119,12 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="">
-                                <button type="button" id="calcularButton" class="btn btn-primary text-uppercase fw-bold">Calcular</button>
+                            <div class="col-6 ">
+                                <button type="button" id="btnCalcular" class="btn btn-primary d-block">Calcular</button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
             </div>
         </section>
     </main>
@@ -133,8 +132,6 @@
     <footer>
         <!-- Rodapé da página -->
     </footer>
-
-
 
     <!-- Script Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

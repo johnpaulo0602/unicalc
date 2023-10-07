@@ -1,68 +1,81 @@
-const cursosESemestres = {
-    administração: 8,
-    "arquitetura-e-urbanismo": 10,
-    "ciências-contábeis": 8,
-    direito: 10,
-    enfermagem: 8,
-    "engenharia-civil": 10,
-    farmácia: 8,
-    medicina: 12,
-    odontologia: 10,
-    pedagogia: 8
-};
+const { inputSemestres } = require("./domElements");
+const { cursosESemestres } = require("./CursosESemestre")
 
-// Selecione o elemento do campo de seleção de semestre
-const inputSemestre = document.getElementById("inputSemestre");
-
-// Desabilite o campo de seleção de semestre por padrão
-inputSemestre.disabled = true;
-
-// Evento de mudança no campo "Curso"
-document.getElementById("inputCurso").addEventListener("change", function () {
-    const cursoSelecionado = this.value;
-
-    // Obtenha a quantidade de semestres para o curso selecionado
+// Função para habilitar ou desabilitar o campo de seleção de semestre
+function habilitarDesabilitarCampoSemestre(cursoSelecionado) {
     const quantidadeSemestres = cursosESemestres[cursoSelecionado];
+    inputSemestres.disabled = quantidadeSemestres === undefined;
 
-    // Habilitar ou desabilitar o campo de seleção de semestre com base no curso selecionado
-    inputSemestre.disabled = quantidadeSemestres === undefined;
-
-    if (!inputSemestre.disabled) {
-        // Se o curso selecionado tiver uma quantidade de semestres definida, atualize as opções do campo de seleção de semestre
-        inputSemestre.innerHTML = ""; // Limpe as opções existentes
-
-        // Crie as opções de semestre com base na quantidade de semestres
-        for (let i = 1; i <= quantidadeSemestres; i++) {
-            const option = document.createElement("option");
-            option.value = i.toString();
-            option.textContent = `${i}º Semestre`;
-            inputSemestre.appendChild(option);
-        }
+    if (!inputSemestres.disabled) {
+        atualizarOpcoesSemestre(quantidadeSemestres);
     }
-});
+}
+
+// Função para atualizar as opções do campo de seleção de semestre
+function atualizarOpcoesSemestre(quantidadeSemestres) {
+    inputSemestres.innerHTML = "";
+    for (let i = 1; i <= quantidadeSemestres; i++) {
+        const option = document.createElement("option");
+        option.value = i.toString();
+        option.textContent = `${i}º Semestre`;
+        inputSemestres.appendChild(option);
+    }
+}
 
 
 // Função para calcular o ano de ingresso com base no semestre selecionado
 function calcularAnoIngresso(semestreSelecionado) {
     const dataAtual = new Date();
     const anoAtual = dataAtual.getFullYear();
-
-    // Obtenha a quantidade de semestres do curso selecionado
-    const cursoSelecionado = document.getElementById("inputCurso").value;
-    const quantidadeSemestres = cursosESemestres[cursoSelecionado];
-
-    // Calcule o ano de ingresso
     const anoIngresso = anoAtual - Math.floor(semestreSelecionado / 2);
-
     console.log(`Ano de ingresso para o semestre ${semestreSelecionado}: ${anoIngresso}`);
     return anoIngresso;
 }
 
-// Evento de mudança no campo "Semestre"
-document.getElementById("inputSemestre").addEventListener("change", function () {
-    const semestreSelecionado = parseInt(this.value);
-    calcularAnoIngresso(semestreSelecionado);
-});
+// Função para calcular e exibir os valores dos semestres
+function calcularValorSemestre(valorInicialMensalidade, taxaReajuste, semestreSelecionado) {
+    const cursoSelecionado = document.getElementById("inputCurso").value;
+    const quantidadeSemestres = cursosESemestres[cursoSelecionado];
+
+    if (quantidadeSemestres === undefined) {
+        console.error("Quantidade de semestres indefinida para o curso selecionado.");
+        return;
+    }
+
+    const valoresSemestrais = [];
+
+    for (let semestre = semestreSelecionado; semestre <= quantidadeSemestres; semestre++) {
+        if (semestre % 2 !== 0 && semestre !== 1) {
+            // Aplicar reajuste apenas nos semestres ímpares, exceto o primeiro
+            valorInicialMensalidade *= (1 + taxaReajuste);
+        }
+        valoresSemestrais.push(valorInicialMensalidade);
+    }
+
+    exibirResultado(valoresSemestrais, semestreSelecionado);
+}
+
+// Função para exibir os resultados na página
+function exibirResultado(valoresSemestrais, semestreSelecionado) {
+    const resultadoDiv = document.getElementById("resultadoId");
+
+    const resultadoHTML = `
+        <h2>Valores Semestrais:</h2>
+        <ul>${valoresSemestrais.map((valor, index) => `<li>${index + semestreSelecionado}º Semestre: R$ ${valor.toFixed(2)}</li>`).join('\n')}</ul>
+    `;
+
+    resultadoDiv.innerHTML = resultadoHTML;
+}
+
+// Função para obter os valores dos campos de entrada
+function obterValoresInput() {
+    const semestreSelecionado = parseInt(inputSemestres.value); // Obtém o valor do campo Semestre
+    const valorInicialMensalidade = parseFloat(inputValor.value); // Obtém o valor do campo Mensalidade
+    const taxaReajuste = parseFloat(inputReajuste.value) / 100; // Obtém o valor do campo Reajuste
+    const desconto = parseFloat(inputDesconto.value); // Obtém o valor do campo Juros
+
+    return { semestreSelecionado, valorInicialMensalidade, taxaReajuste, desconto };
+}
 
 // Função para calcular o valor por semestre
 function calcularValorPorSemestre(mensalidade, taxaReajuste, semestreSelecionado) {
