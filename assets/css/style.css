@@ -168,3 +168,17 @@ body {
     background-position: center center;
     padding: 3rem 0; /* Ajuste o espaçamento superior e inferior conforme necessário */
 }
+
+/* apex chart */
+.apex-chart {
+  margin: 0 auto;
+}
+.apexcharts-toolbar {
+  z-index: 1 !important;
+}
+.apexcharts-menu-item {
+  width: 110px;
+}
+.word-tree {
+  height: 400px;
+}
