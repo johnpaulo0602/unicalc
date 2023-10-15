@@ -1,0 +1,84 @@
+{
+  "cursos": [
+    {
+      "nome": "Administração",
+      "semestres": 8
+    },
+    {
+      "nome": "Ciências Contábeis",
+      "semestres": 8
+    },
+    {
+      "nome": "Direito",
+      "semestres": 10
+    },
+    {
+      "nome": "Enfermagem",
+      "semestres": 10
+    },
+    {
+      "nome": "Engenharia Civil",
+      "semestres": 10
+    },
+    {
+      "nome": "Farmácia",
+      "semestres": 10
+    },
+    {
+      "nome": "Medicina",
+      "semestres": 10
+    },
+    {
+      "nome": "Odontologia",
+      "semestres": 10
+    },
+    {
+      "nome": "Pedagogia",
+      "semestres": 8
+    },
+    {
+      "nome": "Fisioterapia",
+      "semestres": 10
+    },
+    {
+      "nome": "Veterinária",
+      "semestres": 10
+    },
+    {
+      "nome": "Educação Física",
+      "semestres": 8
+    },
+    {
+      "nome": "Análise e Desenvolvimento de Sistemas",
+      "semestres": 5
+    },
+    {
+      "nome": "Sistemas da Informação",
+      "semestres": 8
+    },
+    {
+      "nome": "Agronomia",
+      "semestres": 10
+    },
+    {
+      "nome": "Ciências Contábeis",
+      "semestres": 8
+    },
+    {
+      "nome": "Engenharia Civil",
+      "semestres": 10
+    },
+    {
+      "nome": "Gestão de Recursos Humanos",
+      "semestres": 5
+    },
+    {
+      "nome": "Nutrição",
+      "semestres": 8
+    },
+    {
+      "nome": "Psicologia",
+      "semestres": 10
+    }
+  ]
+}

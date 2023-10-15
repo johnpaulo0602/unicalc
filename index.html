@@ -1,107 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UniDash</title>
+    <title>UniCalc</title>
 
     <!-- Css Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <!-- Icones -->
+    <!-- Css SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- Css Personalizado -->
+    <!-- CSS Personalizado -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <main>
-        <!-- Hero section -->
+        <!-- Seção Hero -->
         <section class="container-fluid background-section">
             <div class="container">
-                <div class="row flex-lg-row-reverse align-items-center justify-content-md-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
+                <div class="row flex-lg-row-reverse align-items-center justify-content-center g-4 py-md-5 py-sm-2">
+                    <div class="col-10 col-sm-10 col-lg-6">
                         <img src="assets/img/Estudante-Unidash.png" class="d-block mx-lg-auto img-fluid"
                             alt="Estudante sorrindo" width="700" height="500" loading="lazy">
                     </div>
                     <div class="col-lg-6">
-                        <h1 class="display-5 fw-bold lh-1 mb-3 text-white">Planeje o seu Futuro Acadêmico</h1>
+                        <h1 class="display-5 fw-bold mb-3 text-white">Planeje o seu Futuro Acadêmico</h1>
                         <p class="lead text-white">Antecipe os gastos com sua graduação na Unidesc. Use nossa ferramenta
                             para calcular o custo total do curso, juros e bolsa.</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <a href="resultado.html" type="button" class="btn btn-primary">Calcular Agora! <i
-                                    class="bi bi-chevron-down"></i></a>
+                            <a href="#calcular" type="button" class="btn btn-primary">Calcular
+                                Agora!</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Calculo -->
+        <!-- Cálculo -->
         <section id="calcular">
-            <div class="container">
-                <div class="text-center m-5">
+            <div class="container col-lg-8 col-sm-12 my-5">
+                <div class="text-center mb-4">
                     <h1>Faça agora o calculo da sua mensalidade!</h1>
-                    <p class="">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem nisi quae sequi facere autem, aut esse reiciendis asperiores, quisquam neque nam est ex cumque laborum saepe. Distinctio ipsum quos natus?</p>
                 </div>
-                <div class="card">
+                <div class="card p-xxl-4 p-sm-0">
                     <div class="card-body">
-                        <form class="row align-items-center g-3">
-                            <div class="col-md-8">
+                        <form class="row align-items-center g-3" id="calculoForm">
+                            <div class="col-lg-8 col-md-12">
                                 <label for="inputCurso" class="form-label">Curso</label>
-                                <select id="inputCurso" class="form-select">
-                                    <option selected>Selecione seu curso...</option>
-                                    <option value="administração">Administração</option>
-                                    <option value="arquitetura-e-urbanismo">Arquitetura e Urbanismo</option>
-                                    <option value="ciências-contábeis">Ciências Contábeis</option>
-                                    <option value="direito">Direito</option>
-                                    <option value="enfermagem">Enfermagem</option>
-                                    <option value="engenharia-civil">Engenharia Civil</option>
-                                    <option value="farmácia">Farmácia</option>
-                                    <option value="medicina">Medicina</option>
-                                    <option value="odontologia">Odontologia</option>
-                                    <option value="pedagogia">Pedagogia</option>
+                                <select id="inputCurso" class="form-select" required>
+                                    <option value="" selected>Selecione seu curso...</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputSemestre" class="form-label">Semestre</label>
-                                <select id="inputSemestre" class="form-select" disabled>
-                                    <option selected>Selecione...</option>
-                                    <option value="1">1º</option>
-                                    <option value="2">2º</option>
-                                    <option value="3">3º</option>
-                                    <option value="4">4º</option>
-                                    <option value="5">5º</option>
-                                    <option value="6">6º</option>
-                                    <option value="7">7º</option>
-                                    <option value="8">8º</option>
-                                    <option value="9">9º</option>
-                                    <option value="10">10º</option>
+                            <div class="col-lg-4 col-md-12">
+                                <label for="inputSemestre" class="form-label">Semestre Atual</label>
+                                <select id="inputSemestre" class="form-select" disabled required>
+                                    <option value="" selected>Selecione...</option> 
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <label for="inputValorMensalidade" class="form-label">Valor da mensalidade</label>
-                                <input type="number" class="form-control" placeholder="R$" id="inputValorMensalidade">
+                                <input type="number" class="form-control" placeholder="R$" id="inputValorMensalidade" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <label for="inputTxReajuste" class="form-label">Taxa de Reajuste</label>
-                                <input type="number" class="form-control" placeholder="%" id="inputTxReajuste">
-                            </div>
-                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="%" id="inputTxReajuste" required pattern="[0-9]+(\.[0-9]+)?" title="Digite um número válido (ex: 2.7)">
+                            </div>                            
+                            <div class="col-lg-4 col-md-12">
                                 <label for="inputBolsa" class="form-label">Possui bolsa?</label>
-                                <select id="inputBolsa" class="form-select">
-                                    <option selected>Selecione...</option>
+                                <select id="inputBolsa" class="form-select" required>
+                                    <option value="" selected >Selecione...</option>
                                     <option value="sim">Sim</option>
                                     <option value="nao">Não</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputBolsa" class="form-label">Qual modalidade?</label>
-                                <select id="inputBolsa" class="form-select">
-                                    <option selected>Selecione...</option>
+                            <div class="col-lg-4 col-md-12">
+                                <label for="inputModalidadeBolsa" class="form-label">Qual modalidade?</label>
+                                <select id="inputModalidadeBolsa" class="form-select">
+                                    <option value="" selected>Selecione...</option>
                                     <option value="prouni">ProUni</option>
                                     <option value="fies">FIES</option>
                                     <option value="ovg">OVG</option>
@@ -109,46 +91,101 @@
                                     <option value="outras">Outras</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputTxJuros" class="form-label">% de Desconto</label>
-                                <input type="number" class="form-control" placeholder="%" id="inputTxJuros">
+                            <div class="col-lg-4 col-md-12">
+                                <label for="inputDescBolsa" class="form-label">% de Desconto</label>
+                                <input type="number" class="form-control" placeholder="%" id="inputDescBolsa" required>
                             </div>
                             <div class="col-12">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Aceito os <a href="#">termos e condições</a>
+                                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                                    <label class="form-check-label" for="gridCheck"> Aceito os <a href="termos.html">termos e condições</a>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-6 ">
-                                <button type="button" id="calcularButton" class="btn btn-primary d-block">Calcular</button>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary">Calcular</button>
                             </div>
                         </form>
+                        <div class="row mt-4 g-3 d-none" id="resultados">
+                            <h2 class="text-center">Confira os resultados</h2>
+                            <div class="col-sm-12 col-xl-6 box-col-">
+                                <div class="border rounded-4 p-4">
+                                    <span>Valor da mensalidade</span>
+                                    <h3 id="valorMensalidade">R$0,00</h3>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xl-6 box-col-">
+                                <div class="border rounded-4 p-4">
+                                    <span>Valor total do curso</span>
+                                    <h3 id="valorTotalCurso">R$0,00</h3>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xl-6 box-col-">
+                                <div class="border rounded-4 p-4">
+                                    <span>Total pago até agora</span>
+                                    <h3 id="valorPago">R$0,00</h3>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xl-6 box-col-">
+                                <div class="border rounded-4 p-4">
+                                    <span>Valor total a pagar</span>
+                                    <h3 id="valorFaltaPagar">R$0,00</h3>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xl-12 box-col-12">
+                                <div class="border rounded-4 p-4">
+                                    <div class="row g-5">
+
+                                        <div class="col-sm-12 col-xl-6 box-col-6">
+                                            <div class="pb-0">
+                                                <h5 class="text-center">Valores a pagar</h5>
+                                            </div>
+                                            <div id="chart-total-curso"></div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-xl-6 box-col-6">
+                                            <div class="pb-0">
+                                                <h5 class="text-center">Aumento progressivo das mensalidades</h5>
+                                            </div>
+                                            <div id="chart-mensalidade-semestre"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xl-12 box-col-12">
+                                <div class="border rounded-4 p-4">
+                                    <div class="pb-0">
+                                        <h5>Valores total por semestre</h5>
+                                    </div>
+                                    <div>
+                                        <div id="chart-total-semestre"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
         </section>
     </main>
-
-    <footer>
-        <!-- Rodapé da página -->
-    </footer>
-
-
 
     <!-- Script Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <!-- Script Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" src="assets/js/chart-custom.js"></script>
+    <!-- Script apex chart -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!-- Script calculos -->
     <script type="module" src="assets/js/calculo.js"></script>
+    <script type="module" src="assets/js/frontend.js"></script>
 </body>
 
 </html>
