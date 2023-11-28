@@ -182,3 +182,31 @@ body {
 .word-tree {
   height: 400px;
 }
+
+/* footer */
+
+footer {
+  background: url("../img/Bg-Unidash.png");
+  color: azure;
+}
+
+.line {
+  width: 20px;
+  height: 6px;
+  border-radius: 40px;
+  position: relative;
+  animation: underline-animation 4s infinite;
+}
+
+@keyframes underline-animation {
+  0% {
+      left: 25%;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      left: 75%;
+      opacity: 0;
+  }
+}
