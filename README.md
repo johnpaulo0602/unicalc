@@ -33,11 +33,11 @@ O dashboard fornecerá informações detalhadas, incluindo o valor total do curs
 
 ## Capturas de Tela
 
-Captura 1
+![Captura 1](assets/img/UniCalc-Home.png)
+*Home*
 
-Captura 2
-
-Captura 3
+![Captura 2](assets/img/UniCalc-Calculo.png)
+*Calculos*
 
 ## Contribuição
 
